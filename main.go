@@ -13,7 +13,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 func main() {
 	port := os.Getenv("PORT")
 	if port == "" {
-		port = "8080"
+		port = "10000"
 	}
 
 	mux := http.NewServeMux()
