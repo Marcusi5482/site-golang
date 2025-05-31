@@ -1,24 +1,15 @@
 package main
 
 import (
-	"net/http"
-	"os"
+	"github.com/gofiber/fiber/v3"
 )
 
-func indexHandler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("<h1>Hello World!</h1>"))
-	w.Write([]byte("<h1>Gigachad</h1>"))
-	w.Write([]byte("<h1>https://github.com/Marcusi5482/site-golang/releases/tag/1</h1>"))
-}
-
 func main() {
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = "10000"
-	}
+	app := fiber.New()
 
-	mux := http.NewServeMux()
+	app.Get("/:name?", func(c fiber.Ctx) error {
+		return c.SendString("Hello World!\nGigachad\nhttps://github.com/Marcusi5482/site-golang/releases/tag/1")
+	})
 
-	mux.HandleFunc("/", indexHandler)
-	http.ListenAndServe(":"+port, mux)
+	app.Listen(":10000")
 }
